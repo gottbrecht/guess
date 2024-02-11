@@ -20,19 +20,19 @@ body {
   }
 
   #output {
-    font-size: 18px;
+    font-size: 20px;
     margin-bottom: 25px;
   }
   
   button {
-    font-size: 16px;
-    padding: 10px;
-    margin: 5px;
+    font-size: 18px;
+    padding: 12px;
+    margin: 8px;
     cursor: pointer;
     background-color: #e62a85;
     color: white;
     border: none;
-    border-radius: 5px;
+    border-radius: 8px;
   }
   
   button:hover {
