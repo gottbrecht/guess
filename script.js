@@ -1,11 +1,18 @@
-function getRandomNumber(min, max) {
-    return Math.floor(Math.random() * (max - min)) + min;
-}
+"use strict";
+
+const values = [1, 2, 3, 4, 5, 7, 8, 9, 11, 12, 14, 15];
 
 let minGuess;
 let maxGuess;
 let currentGuess;
+let guessCount = 1;
+let bestGuessCount = Infinity;
 
+function getRandomNumber(min, max) {
+    return Math.floor(Math.random() * (max - min)) + min;
+}
+
+// Initialise the game:
 function initializeGame() {
     minGuess = 1;
     maxGuess = 101; // 101 because it's exclusive
@@ -13,40 +20,43 @@ function initializeGame() {
     document.getElementById('guess').textContent = currentGuess;
 }
 
-let guessCount = 1;
-let bestGuessCount = Infinity;
-
+//based on the users response
 function updateGuess(response) {
-    guessCount++; 
+    guessCount++;
 
     if (response === 'low') {
         minGuess = currentGuess + 1;
     } else if (response === 'high') {
         maxGuess = currentGuess;
     }
-    currentGuess = binarySearchRecursive((minGuess + maxGuess) / 2, values, 0, values.length - 1);
-    console.log('Computeren gættede: ' + currentGuess);
 
+    // to get the next guess - execute binary search:
+    currentGuess = binarySearchRecursive((minGuess + maxGuess) / 2, values, 0, values.length - 1);
+
+    console.log('Computer guessed: ' + currentGuess);
+    
     if (currentGuess === -1) {
-        console.log('Tallet blev ikke fundet!');
+        console.log('Number not found');
         resetGame();
     } else if (minGuess === maxGuess) {
-        console.log('Det var det eneste mulige svar!');
-        console.log('Antal gæt: ' + guessCount);
+        console.log('Thats the answer!');
+        console.log('Amount of guesses: ' + guessCount);
 
         if (guessCount < bestGuessCount) {
             bestGuessCount = guessCount;
-            console.log('Nyt bedste antal gæt!');
+            console.log('Best guess!');
         }
         resetGame();
     }
 }
 
+// Nulstil spillet
 function resetGame() {
     initializeGame();
     guessCount = 1;
 }
 
+// Binær søgefunktion
 function binarySearchRecursive(value, values, start, end) {
     if (start > end) {
         return -1;
@@ -63,4 +73,6 @@ function binarySearchRecursive(value, values, start, end) {
         return binarySearchRecursive(value, values, start, middle - 1);
     }
 }
+
+
 initializeGame();
