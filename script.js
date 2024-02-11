@@ -12,7 +12,7 @@ function getRandomNumber(min, max) {
     return Math.floor(Math.random() * (max - min)) + min;
 }
 
-// Initialise the game:
+// Initialize the game:
 function initializeGame() {
     minGuess = 1;
     maxGuess = 101; // 101 because it's exclusive
@@ -34,7 +34,7 @@ function updateGuess(response) {
     currentGuess = binarySearchRecursive((minGuess + maxGuess) / 2, values, 0, values.length - 1);
 
     console.log('Computer guessed: ' + currentGuess);
-    
+
     if (currentGuess === -1) {
         console.log('Number not found');
         resetGame();
@@ -50,14 +50,14 @@ function updateGuess(response) {
     }
 }
 
-// Nulstil spillet
-function resetGame() {
+
+function resetGame() { //resets the game
     initializeGame();
     guessCount = 1;
 }
 
-// Binær søgefunktion
-function binarySearchRecursive(value, values, start, end) {
+
+function binarySearchRecursive(value, values, start, end) { //binary search
     if (start > end) {
         return -1;
     }
@@ -74,5 +74,19 @@ function binarySearchRecursive(value, values, start, end) {
     }
 }
 
-
 initializeGame();
+document.getElementById('tooLowButton').addEventListener('click', function() {
+    updateGuess('low');
+});
+
+document.getElementById('tooHighButton').addEventListener('click', function() {
+    updateGuess('high');
+});
+
+document.getElementById('correctButton').addEventListener('click', function() {
+    console.log('Correct button clicked');  
+});
+
+document.getElementById('tryAgainButton').addEventListener('click', function() {
+    console.log('Try Again button clicked');  
+});
