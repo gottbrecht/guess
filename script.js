@@ -39,7 +39,7 @@ function updateGuess(response) {
         console.log('Number not found');
         resetGame();
     } else if (minGuess === maxGuess) {
-        console.log('Thats the answer!');
+        console.log('That\'s the answer!');
         console.log('Amount of guesses: ' + guessCount);
 
         if (guessCount < bestGuessCount) {
@@ -75,6 +75,7 @@ function binarySearchRecursive(value, values, start, end) { //binary search
 }
 
 initializeGame();
+
 document.getElementById('tooLowButton').addEventListener('click', function() {
     updateGuess('low');
 });
