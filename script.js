@@ -57,46 +57,7 @@ function binarySearchGame() { // performs a binary search to guess the correct n
         }
     }
 }
-/*
-    // to get the next guess - execute binary search:
-    currentGuess = binarySearchRecursive((minGuess + maxGuess) / 2, values, 0, values.length - 1);
 
-    console.log('Computer guessed: ' + currentGuess);
-
-    if (currentGuess === -1) {
-        console.log('Number not found');
-        resetGame();
-    } else if (minGuess === maxGuess) {
-        console.log('That\'s the answer!');
-        console.log('Amount of guesses: ' + guessCount);
-
-        if (guessCount < bestGuessCount) {
-            bestGuessCount = guessCount;
-            console.log('Best guess!');
-        }
-        resetGame();
-    }
-}
-*/
-
-/*
-function binarySearchRecursive(value, values, start, end) { //binary search
-    if (start > end) {
-        return -1;
-    }
-
-    let middle = Math.floor((start + end) / 2);
-    const lookAt = values[middle];
-
-    if (value === lookAt) {
-        return middle;
-    } else if (value > lookAt) {
-        return binarySearchRecursive(value, values, middle + 1, end);
-    } else if (value < lookAt) {
-        return binarySearchRecursive(value, values, start, middle - 1);
-    }
-}
-*/
 function resetGame() { //resets the game
     initializeGame();
     guessCount = 1;
