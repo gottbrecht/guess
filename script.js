@@ -1,7 +1,6 @@
 "use strict";
 
-const values = [1, 2, 3, 4, 5, 7, 8, 9, 11, 12, 14, 15];
-
+//const values = [1, 2, 3, 4, 5, 7, 8, 9, 11, 12, 14, 15];
 let minGuess;
 let maxGuess;
 let currentGuess;
@@ -17,7 +16,7 @@ function initializeGame() {
     minGuess = 1;
     maxGuess = 101; // 101 because it's exclusive
     currentGuess = getRandomNumber(minGuess + 5, maxGuess - 5);
-    document.getElementById('guess').textContent = currentGuess;
+    document.getElementById('guess').textContent = "";
 }
 
 //based on the users response
@@ -30,6 +29,35 @@ function updateGuess(response) {
         maxGuess = currentGuess;
     }
 
+    binarySearchGame();
+}
+
+function binarySearchGame() {
+    while (minGuess <= maxGuess) {
+        let currentGuess = Math.floor((minGuess + maxGuess) / 2);
+        let userResponse = confirm(`Is ${currentGuess} your number?`);
+        if(userResponse) {
+            alert('Perfect! Computer guessed the right number ${currentGuess} at ${guessCount} guesses.');
+        
+            if(guessCount < bestGuessCount) {
+                bestGuessCount = guessCount;
+                console.log('Woow! The bedst guess!');
+            }
+
+            resetGame();
+            break;
+        }else {
+            let tooHigh = confirm(`Is ${currentGuess} too high?`);
+
+            if(tooHigh) {
+                maxGuess = currentGuess - 1;
+            }else {
+                minGuess = currentGuess + 1;
+            }
+        }
+    }
+}
+/*
     // to get the next guess - execute binary search:
     currentGuess = binarySearchRecursive((minGuess + maxGuess) / 2, values, 0, values.length - 1);
 
@@ -49,14 +77,9 @@ function updateGuess(response) {
         resetGame();
     }
 }
+*/
 
-
-function resetGame() { //resets the game
-    initializeGame();
-    guessCount = 1;
-}
-
-
+/*
 function binarySearchRecursive(value, values, start, end) { //binary search
     if (start > end) {
         return -1;
@@ -73,7 +96,11 @@ function binarySearchRecursive(value, values, start, end) { //binary search
         return binarySearchRecursive(value, values, start, middle - 1);
     }
 }
-
+*/
+function resetGame() { //resets the game
+    initializeGame();
+    guessCount = 1;
+}
 initializeGame();
 
 document.getElementById('tooLowButton').addEventListener('click', function() {
@@ -89,5 +116,6 @@ document.getElementById('correctButton').addEventListener('click', function() {
 });
 
 document.getElementById('tryAgainButton').addEventListener('click', function() {
+    resetGame();
     console.log('Try Again button clicked');  
 });
