@@ -32,7 +32,7 @@ function updateGuess(response) {
     binarySearchGame();
 }
 
-function binarySearchGame() {
+function binarySearchGame() { // performs a binary search to guess the correct number. It uses confirm to ask the user if the current guess is correct. Based on the user's response, it adjusts minGuess and maxGuess. 
     while (minGuess <= maxGuess) {
         let currentGuess = Math.floor((minGuess + maxGuess) / 2);
         let userResponse = confirm(`Is ${currentGuess} your number?`);
